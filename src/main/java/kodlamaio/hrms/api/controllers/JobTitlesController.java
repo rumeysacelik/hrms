@@ -19,7 +19,7 @@ public class JobTitlesController {
 	this.jobTitleService=jobTitleService;
 	}
 
-	
+	//mapping anotasyonu
 	@GetMapping("/getall")
 	public List<JobTitle> getAll(){
 	return jobTitleService.getAll();
