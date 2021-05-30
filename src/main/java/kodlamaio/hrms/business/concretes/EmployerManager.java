@@ -35,7 +35,6 @@ public class EmployerManager implements EmployerService{
 
 	@Override
 	public DataResult<Employer> add(Employer employer) {
-		// TODO Auto-generated method stub
 		
 		if(!companyNameChecker(employer)) {
 			return new ErrorDataResult<Employer>(null,"Şirket adı doldurulmak zorundadır.");
