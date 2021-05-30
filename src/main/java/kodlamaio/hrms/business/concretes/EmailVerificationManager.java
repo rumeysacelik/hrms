@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmailVerificationService;
+import kodlamaio.hrms.core.GenerateRandomCode;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
-import kodlamaio.hrms.core.utilities.results.GenerateRandomCode;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.dataAccess.abstracts.CityDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmailVerificationDao;
+import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
 import kodlamaio.hrms.entities.concretes.EmailVerification;
 import kodlamaio.hrms.entities.concretes.User;
@@ -17,10 +19,12 @@ import kodlamaio.hrms.entities.concretes.User;
 public class EmailVerificationManager  implements EmailVerificationService{
 	private EmailVerificationDao emailVerificationDao;
 	
+	
     @Autowired
 	public EmailVerificationManager(EmailVerificationDao emailVerificationDao) {
 		super();
 		this.emailVerificationDao = emailVerificationDao;
+		
 	}
 
     @Override

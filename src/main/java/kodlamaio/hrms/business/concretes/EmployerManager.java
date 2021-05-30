@@ -68,7 +68,7 @@ public class EmployerManager implements EmployerService{
 	}
 	
 	private boolean webSiteChecker(Employer employer) {
-		if(employer.getWebAdress().isBlank() || employer.getWebAdress() == null) {
+		if(employer.getWebAddress().isBlank() || employer.getWebAddress() == null) {
 			return false;
 		}
 		return true;
@@ -81,7 +81,7 @@ public class EmployerManager implements EmployerService{
 	     if(!matcher.matches()) {
 	    	 return false;
 	     }
-	     else if(!employer.getEmail().contains(employer.getWebAdress())) {
+	     else if(!employer.getEmail().contains(employer.getWebAddress())) {
 	    	return false; 
 	     }
 	     return true;

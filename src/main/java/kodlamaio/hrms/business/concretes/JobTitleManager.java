@@ -14,7 +14,6 @@ import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobTitleDao;
 import kodlamaio.hrms.entities.concretes.JobTitle;
-import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 
 @Service
 public class JobTitleManager implements JobTitleService{
@@ -28,31 +27,29 @@ public class JobTitleManager implements JobTitleService{
 	
 	@Override
 	public DataResult<List<JobTitle>> getAll() {
-		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<JobTitle>>(jobTitleDao.findAll(),"Başarıyla listelendi");
+		
+		return new SuccessDataResult<List<JobTitle>>(jobTitleDao.findAll(),"Başarılı Şekilde Listelendi");
 	}
 
 	@Override
 	public DataResult<List<JobTitle>> findById(int id) {
-		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findById(id),"Başarıyla listelendi");
+		
+		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findById(id),"Başarı Şekilde Listelendi");
 	}
 
 	@Override
     public DataResult<List<JobTitle>> findJobTitles(String title) {
-        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findJobTitles(title),"Başarıyla listelendi");
+        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findJobTitles(title),"Başarı Şekilde Listelendi");
     }
 
 	@Override
 	public DataResult<JobTitle> add(JobTitle title) {
-		// TODO Auto-generated method stub
+		
 		if(jobTitleDao.findAllByTitle(title.getTitle()).stream().count() !=0 ) {
-			return new ErrorDataResult<JobTitle>(null,"Bu iş pozisyonu zaten kayıtlı");
+			return new ErrorDataResult<JobTitle>(null,"Böyle Bir İş Pozisyonu Zaten Kayıtlı");
 			
 		}
-		return new SuccessDataResult<JobTitle>(this.jobTitleDao.save(title),"İş pozisyonu başarıyla listelendi");
+		return new SuccessDataResult<JobTitle>(this.jobTitleDao.save(title),"Başarıyla İş Pozisyonu Eklendi");
 		
 	}
-
-
-}
+}	
