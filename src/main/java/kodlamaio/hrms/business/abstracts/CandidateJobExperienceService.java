@@ -8,5 +8,5 @@ import kodlamaio.hrms.entities.concretes.CandidateJobExperience;
 public interface CandidateJobExperienceService {
 	DataResult<List<CandidateJobExperience>> getAll();
 
-	DataResult<List<CandidateJobExperience>> orderedCandidateCvJobExperience(int id);
+	DataResult<List<CandidateJobExperience>> orderedCandidateCvJobExperience(int  id);
 }
