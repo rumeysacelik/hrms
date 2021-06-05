@@ -29,7 +29,7 @@ public class CandidateController {
 	}
 	
 	@PostMapping("/add")
-	public DataResult<Candidate> add(@RequestBody Candidate candidate){
+	public DataResult<Candidate> add(@RequestBody  Candidate candidate){
 		return this.candidateService.add(candidate);
 	}
 }

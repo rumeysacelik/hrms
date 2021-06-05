@@ -8,5 +8,6 @@ import lombok.Data;
 
 public interface CandidateService {
 	DataResult<Candidate> add(Candidate candidate);
-	DataResult<List<Candidate>>getAll();
+	
+	DataResult<List<Candidate>> getAll();
 }

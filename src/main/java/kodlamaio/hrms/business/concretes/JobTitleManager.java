@@ -28,28 +28,28 @@ public class JobTitleManager implements JobTitleService{
 	@Override
 	public DataResult<List<JobTitle>> getAll() {
 		
-		return new SuccessDataResult<List<JobTitle>>(jobTitleDao.findAll(),"Başarılı Şekilde Listelendi");
+		return new SuccessDataResult<List<JobTitle>>(jobTitleDao.findAll(),"Başarıyla listelendi");
 	}
 
 	@Override
 	public DataResult<List<JobTitle>> findById(int id) {
 		
-		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findById(id),"Başarı Şekilde Listelendi");
+		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findById(id),"Başarıyla listelendi");
 	}
 
 	@Override
     public DataResult<List<JobTitle>> findJobTitles(String title) {
-        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findJobTitles(title),"Başarı Şekilde Listelendi");
+        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findJobTitles(title),"Başarıyla listelendi");
     }
 
 	@Override
 	public DataResult<JobTitle> add(JobTitle title) {
 		
 		if(jobTitleDao.findAllByTitle(title.getTitle()).stream().count() !=0 ) {
-			return new ErrorDataResult<JobTitle>(null,"Böyle Bir İş Pozisyonu Zaten Kayıtlı");
+			return new ErrorDataResult<JobTitle>(null,"Böyle bir iş pozisyonu zaten kayıtlı");
 			
 		}
-		return new SuccessDataResult<JobTitle>(this.jobTitleDao.save(title),"Başarıyla İş Pozisyonu Eklendi");
+		return new SuccessDataResult<JobTitle>(this.jobTitleDao.save(title),"Başarıyla listelendi");
 		
 	}
 }	
