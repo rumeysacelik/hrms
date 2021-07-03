@@ -6,43 +6,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateSchoolService;
+import kodlamaio.hrms.core.converters.DtoConverterService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateCvDao;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateSchoolDao;
 import kodlamaio.hrms.entities.concretes.CandidateCv;
 import kodlamaio.hrms.entities.concretes.CandidateSchool;
+import kodlamaio.hrms.entities.dtos.CandidateSchoolDto;
 
 @Service
 public class CandidateSchoolManager implements CandidateSchoolService{
 
 	private CandidateSchoolDao CandidateSchoolDao;
 	private CandidateCvDao candidateCvDao;
+	private DtoConverterService dtoConverterService;
 	
 	@Autowired
 	public CandidateSchoolManager(CandidateSchoolDao candidateSchoolDao,
-			CandidateCvDao candidateCvDao) {
+			CandidateCvDao candidateCvDao,DtoConverterService dtoConverterService) {
 		super();
 		CandidateSchoolDao = candidateSchoolDao;
 		this.candidateCvDao = candidateCvDao;
+		this.dtoConverterService = dtoConverterService;
 	}
 
 
 	@Override
 	public DataResult<List<CandidateSchool>> findByCandidateId(int id) {
+		// TODO Auto-generated method stub
 		return new SuccessDataResult<List<CandidateSchool>>(this.CandidateSchoolDao.findByCandidateCvId(id));
 	}
 	
 	
 	@Override
 	public DataResult<List<CandidateSchool>> getAll() {
-		return new SuccessDataResult<List<CandidateSchool>>(this.CandidateSchoolDao.findAll(),"İş arayanın eğitim bilgisi listelendi");
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<CandidateSchool>>(this.CandidateSchoolDao.findAll(),"İş Arayanın Eğitimi Listelendi");
 	}
 
 
 	@Override
-	public DataResult<CandidateSchool> updateSchool(CandidateSchool candidateSchool) {
+	public Result updateSchool(CandidateSchoolDto candidateSchool) {
+		// TODO Auto-generated method stub
 		CandidateSchool ref =  this.CandidateSchoolDao.findById(candidateSchool.getId());
 		
 		if(candidateSchool.getGraduationDate() != null) {
@@ -58,17 +68,46 @@ public class CandidateSchoolManager implements CandidateSchoolService{
 			ref.setDepartment(candidateSchool.getDepartment());
 		}
 		
-		return new SuccessDataResult<CandidateSchool>(this.CandidateSchoolDao.save(ref),"Başarılı şekilde update edildi");
+		 this.CandidateSchoolDao.save((CandidateSchool) dtoConverterService.dtoClassConverter(ref, CandidateSchool.class));
+		
+		return new SuccessResult("başarılı");
 	}
 
 
 	@Override
 	public DataResult<List<CandidateSchool>> orderedCandidateCvSchools(int id) {
+		// TODO Auto-generated method stub
 		if(!this.candidateCvDao.existsById(id)) {
 			return new ErrorDataResult<>("Cv bulunamadı");
 		}
-		return new SuccessDataResult<List<CandidateSchool>>(this.CandidateSchoolDao.getSchoolsOrderByGraduationDateDesc(id),"İş arayanların bilgileri başarıyla listelendi");
+		return new SuccessDataResult<List<CandidateSchool>>(this.CandidateSchoolDao.getSchoolsOrderByGraduationDateDesc(id),"Başarılı Şekilde İş arayanın okul bilgileri listelendi");
 	}
+
+
+	@Override
+	public Result add(CandidateSchoolDto school) {
+		// TODO Auto-generated method stub
+		this.CandidateSchoolDao.save((CandidateSchool) dtoConverterService.dtoClassConverter(school, CandidateSchool.class));
+		return new SuccessResult("Başarılı");
+	}
+
+
+	@Override
+	public DataResult<List<CandidateSchool>> getBySchoolId(int id) {
+		// TODO Auto-generated method stub
+		return new SuccessDataResult<List<CandidateSchool>>(this.CandidateSchoolDao.getById(id),"başarılı");
+	}
+
+
+
+    @Override
+    public Result deleteSchool(int schoolId) {
+        if(!this.CandidateSchoolDao.existsById(schoolId)){
+            return new ErrorResult("Böyle bir okul yok");
+        }
+        this.CandidateSchoolDao.deleteById(schoolId);
+        return new SuccessResult("Okul silindi");
+    }
 
 
 

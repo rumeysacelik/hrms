@@ -2,6 +2,7 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import kodlamaio.hrms.entities.concretes.Candidate;
 
 @RestController
 @RequestMapping("/api/candidate")
+@CrossOrigin
 public class CandidateController {
 	private CandidateService candidateService;
 
@@ -23,13 +25,14 @@ public class CandidateController {
 		this.candidateService = candidateService;
 	}
 	
-	@GetMapping("/getall")
+	@GetMapping("/getall" )
 	public DataResult<List<Candidate>> getAll(){
 		return this.candidateService.getAll();
 	}
 	
+	
 	@PostMapping("/add")
-	public DataResult<Candidate> add(@RequestBody  Candidate candidate){
+	public DataResult<Candidate> add(@RequestBody Candidate candidate){
 		return this.candidateService.add(candidate);
 	}
 }

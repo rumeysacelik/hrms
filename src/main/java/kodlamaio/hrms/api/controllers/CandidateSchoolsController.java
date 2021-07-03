@@ -3,6 +3,8 @@ package kodlamaio.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.CandidateSchoolService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.CandidateCv;
 import kodlamaio.hrms.entities.concretes.CandidateSchool;
+import kodlamaio.hrms.entities.dtos.CandidateSchoolDto;
 
 @RestController
 @RequestMapping("/api/candidateschools")
+@CrossOrigin
 public class CandidateSchoolsController {
 	private CandidateSchoolService candidateSchoolService;
 	
@@ -30,13 +35,24 @@ public class CandidateSchoolsController {
 		// TODO Auto-generated method stub
 		return this.candidateSchoolService.findByCandidateId(id);
 	}
+	@GetMapping("/getbyid")
+	public DataResult<List<CandidateSchool>> getbyid(@RequestParam int id) {
+		// TODO Auto-generated method stub
+		return this.candidateSchoolService.getBySchoolId(id);
+	}
 	
 	@PostMapping("/update")
-	public DataResult<CandidateSchool> update(@RequestBody CandidateSchool candidateSchool) {
+	public Result update(@RequestBody CandidateSchoolDto candidateSchool) {
 		// TODO Auto-generated method stub
 		return this.candidateSchoolService.updateSchool(candidateSchool);
 	}
 
+	@PostMapping("/add")
+	public Result add(@RequestBody CandidateSchoolDto school) {
+		// TODO Auto-generated method stub
+		return this.candidateSchoolService.add(school);
+	}
+	
 	
 	@GetMapping("/getall")
 	public DataResult<List<CandidateSchool>> getAll(){
@@ -47,6 +63,11 @@ public class CandidateSchoolsController {
 	public DataResult<List<CandidateSchool>> orderedCandidateCvSchools(@RequestParam int id){
 		return this.candidateSchoolService.orderedCandidateCvSchools(id);
 	}
+	
+	 @DeleteMapping("/deleteSchool")
+	    public Result deleteSchool(@RequestParam int schoolId){
+	        return this.candidateSchoolService.deleteSchool(schoolId);
+	    }
 	
 	
 }

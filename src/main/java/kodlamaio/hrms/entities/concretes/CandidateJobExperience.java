@@ -34,8 +34,10 @@ public class CandidateJobExperience {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	
 	@Column(name="workplace_name")
 	private String workplaceName;
+	
 	@Column(name="entry_date")
 	private Date entryDate;
 	@Column(name="exit_date")
@@ -44,8 +46,12 @@ public class CandidateJobExperience {
 	  @JoinColumn(name = "job_titles_id")
 	   private JobTitle jobtitle;
 	 
+	/**
+	 * 
+	@Column(name="candidates_cv_id")
+	private int candidateCvIds;
 	
-	
+	 */
 	@JsonProperty(access = Access.WRITE_ONLY)
     @ManyToOne()
     @JoinColumn(name="candidates_cv_id")
@@ -54,5 +60,10 @@ public class CandidateJobExperience {
 	
 	@Column(name="is_continue")
 	private boolean isContinue;
+	
+	@Column(name="job_detail")
+	private String jobDetail;
+	
+	
 	
 }

@@ -4,6 +4,7 @@ public class Messages {
 	
 	public static final String requiredFirstName = "Ad bilgisi doldurulmak zorundadır";
 	public static final String isRegisterSuccessForCandidateMessage = "İş arayan hesabı eklendi , doğrulama kodu gönderildi:";
+	public static final String isRegisterSuccessForSystemUserMessage = "Admin hesabı eklendi , doğrulama kodu gönderildi:";
 	public static final String requiredLastName = "SoyAd bilgisi doldurulmak zorundadır";
 	public static final String requiredBirthDate ="Doğum tarihi doldurulmak zorundadır";
 	public static final String requiredEmail = "Email bilgisi doldurulmak zorundadır";

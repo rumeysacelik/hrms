@@ -119,6 +119,13 @@ public class EmployerManager implements EmployerService{
 		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(),"Başarılı Şekilde Employer Listelendi");
 	}
 
+	@Override
+	public Result update(Employer employer) {
+		// TODO Auto-generated method stub
+		  this.employerDao.save(employer);
+          return new SuccessResult("Employer güncellendi.");
+    }
+
 	
 
 	

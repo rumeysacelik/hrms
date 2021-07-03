@@ -1,15 +1,20 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,19 +31,6 @@ public class JobAdvertisement {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
-	/*
-	 * @Column(name="employer_id")
-	private int employerId;
-	 */
-	
-/*
- * 	@Column(name="job_title_id")
-	private int jobtitleId;
- */
-	
-//	@Column(name="city_id")
-//	private int cityId;
 	
 	@Column(name="description")
 	private String description;
@@ -61,6 +53,9 @@ public class JobAdvertisement {
 	@Column(name="is_active")
 	private boolean isActive;
 	
+	@Column(name="is_confirmed_by_admin")
+	private boolean isConfirmed;
+	
 	 @ManyToOne
 	  @JoinColumn(name = "city_id")
 	   private City city;
@@ -72,6 +67,23 @@ public class JobAdvertisement {
 	 @ManyToOne
 	  @JoinColumn(name = "employer_id")
 	   private Employer employer;
+	 
+	 @ManyToOne
+	  @JoinColumn(name = "work_hours_id")
+	   private WorkHour workHour;
+	 
+	 @ManyToOne
+	  @JoinColumn(name = "work_types_id")
+	   private WorkType workType;
+	 
+
+	 @JsonIgnore
+	 @OneToMany(mappedBy = "jobAdvertisement", fetch = FetchType.LAZY)
+	    private List<Favourites> favourites;
+	 
+	
+	
+	
 	
 	
 }
